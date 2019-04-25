@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Crystal Collector
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="innerwrap">
+      <div class="logo">JC Cheney</div>
+      <nav><span class="nav-link"><a href="https://incontextseo.github.io/responsive-portfolio/index.html">About</a></span>
+      <span>&#124;</span>
+      <span class="nav-link"><a href="https://incontextseo.github.io/responsive-portfolio/portfolio.html">Portfolio</a></span>
+      <span>&#124;</span>
+      <span class="nav-link"><a href="https://incontextseo.github.io/responsive-portfolio/contact.html">Contact</a></span>
+        </div>
+      </nav>
+  </header>
+
+  <div class="container">
+        <section class="main-content"> 
+            <div class="row">
+                <div class="col-md-4">  
+                    <h1>Crystal Collector Game!</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <p>You will be given a random number at the start of the game.</p>
+                    <p>There are four crystals below. By clicking on a crystal you will add a specific amount of points to your score.</p>
+                    <p>You win the game by matching your total score to the random number. You will lose the game if your total score exceeds the random number.</p>
+                    <p>The value of each crystal is hidden until you click on it.</p>
+                    <p>Each time the game starts, the game will change the value of each crystal.</p>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <p id="goal-number"></p>
+                    </div>
+                    <div class="col-md-3">
+                        <p id="winner"></p>
+                        <p id="wins"></p>
+                        <p id="losses"></p>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="assets/images/purple-crystal.jpg">
+                        <img src="assets/images/kyber-crystal.jpg">
+                        <img src="assets/images/blue-crystal.jpg">
+                        <img src="assets/images/quartz-crystal.jpg">
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+<script>
+
+var goalNumber;
+var crystalOne;
+var crystalTwo;
+var crystalThree;
+var crystalFour;
+var totalScore = 0;
+
+// Use a function to assign random number for the goalNumber (between 19, 120) and each crystal (between 1,12)
+// push these values to the Dom
+
+$(document).ready(function() {
+
+</script>
+</body>
+</html>
