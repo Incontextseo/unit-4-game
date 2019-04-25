@@ -109,7 +109,35 @@ p {
 
 img {
     border: 1px solid #666;
-    height: 200px;
+    height: 150px;
+}
+
+.directions {
+    background-color: #4aaaa5;
+    width: 40%;
+    color: #fff;
+    float: left;
+    padding: 20px;
+    margin-right: 20px;
+}
+
+.announcement {
+    background-color: black;
+    color: white;
+    font-size: 24px;
+    padding-right: 20px;
+}
+
+.numbers {
+    font-size: 18px;
+    background-color: lightgoldenrodyellow;
+    color: #666;
+}
+
+.tally {
+    font-size: 16px;
+    background-color: lightgreen;
+    color: #fff;
 }
 
 .portfolio-btn {

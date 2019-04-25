@@ -31,29 +31,35 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="directions">
                     <p>You will be given a random number at the start of the game.</p>
                     <p>There are four crystals below. By clicking on a crystal you will add a specific amount of points to your score.</p>
                     <p>You win the game by matching your total score to the random number. You will lose the game if your total score exceeds the random number.</p>
                     <p>The value of each crystal is hidden until you click on it.</p>
                     <p>Each time the game starts, the game will change the value of each crystal.</p>
+                    <button>Play!</button>
                 </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <p id="goal-number"></p>
-                    </div>
-                    <div class="col-md-3">
-                        <p id="winner"></p>
-                        <p id="wins"></p>
-                        <p id="losses"></p>
-                    </div>
-                    <div class="col-md-6">
-                        <img src="assets/images/purple-crystal.jpg">
-                        <img src="assets/images/kyber-crystal.jpg">
-                        <img src="assets/images/blue-crystal.jpg">
-                        <img src="assets/images/quartz-crystal.jpg">
-                    </div>
+            </div>
+            <div class="game">
+                <div class="announcement">  
+                    <p id="win-lost"></p>
+                </div> 
+                <div class="numbers">
+                    <p id="goal-number">Number to match: 0</p>
+                    <hr>
+                    <p id="total-score">Your total score: 0</p>
                 </div>
+                <div class="tally">
+                    <p id="wins">Wins: 0</p>
+                    <p id="losses">Losses: 0</p>
+                </div>
+                <div class="col-md-6">
+                    <img src="assets/images/purple-crystal.jpg" class="crystal">
+                    <img src="assets/images/kyber-crystal.jpg" class="crystal">
+                    <img src="assets/images/blue-crystal.jpg" class="crystal">
+                    <img src="assets/images/quartz-crystal.jpg" class="crystal">
+                </div>
+            </div>
 
             </div>
         </section>
@@ -67,12 +73,53 @@ var crystalTwo;
 var crystalThree;
 var crystalFour;
 var totalScore = 0;
+var wins = 0;
+var losses = 0;
 
-// Use a function to assign random number for the goalNumber (between 19, 120) and each crystal (between 1,12)
-// push these values to the Dom
+var goalNumberText = $("#goal-number")
+var totalScoreText = $('#total-score')
+var announcementText = $('#win-lost')
+var winsText = $('#wins')
+var lossesText = $('#wins')
+
+
 
 $(document).ready(function() {
 
+    // Use a function to assign random number for the goalNumber (between 19, 120) and each crystal (between 1,12)
+    // push the value of the goalNumber to the Dom, but not the crystal values
+    // push the value of each crystal to the HTML with innerHTML
+
+    $('.crystal').on('click', function() {
+        // Add the value of the crystal clicked on to the totalScore
+        var crystalVal = $(this).val();
+        totalScore = totalScore + crystalVal
+
+        // Send totalScore value to DOM
+        totalScoreText.text(totalScore)
+        })
+
+    if (goalNumber === totalScore) {
+        //re-run random number generator function(s)
+
+        // Add a win to the wins variable
+        wins++;
+        // Send wins tally to DOM
+        winsText.text(wins);
+        // Send announcement to DOM
+        announcementText.text('You Won!');
+    };
+    if (totalScore > goalNumber) {
+        //re-run random number generator function(s)
+
+        // Add a loss to the losses variable
+        losses++;
+        // Send losses tally to DOM
+        lossesText.text(losses);
+        // Send announcement to DOM
+        announcementText.text('You Lost!');
+    };
+}
 </script>
 </body>
 </html>
