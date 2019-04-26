@@ -108,6 +108,17 @@ $(document).ready(function() {
     goalNumberText.text(goalNumber)
     console.log(goalNumber);
 
+    function restartGame() {
+        totalScore = 0;
+        totalScoreText.text("Your total score: " + totalScore)
+        crystal = [];
+        makeCrystals();
+        console.log(crystal)
+        goalNumber = Math.floor((Math.random() * 120) + 19);
+        goalNumberText.text(goalNumber)
+        console.log(goalNumber)
+    }
+
  
     console.log(totalScore)
     $('.crystal').on('click', function() {
@@ -128,39 +139,21 @@ $(document).ready(function() {
             announcementText.text('You Won!');
             console.log("Wins: " + wins)
             // reset variables and re-run random number generator function(s)
-            totalScore = 0;
-            crystal = [];
-            makeCrystals();
-            console.log(crystal)
-            goalNumber = Math.floor((Math.random() * 120) + 19);
-            goalNumberText.text(goalNumber)
-            console.log(goalNumber)
+            restartGame()
         } else if (totalScore > goalNumber) {
             // Add a loss to the losses variable
             losses++;
             // Send losses tally to DOM
             lossesText.text("Losses: " + losses);
             // Send announcement to DOM
-            announcementText.text('You Lost!');
+            announcementText.text('You Lost! ' + (totalScore-goalNumber) + " over.");
             console.log("Losses: " + losses)
             // reset variables and re-run random number generator function(s)
-            totalScore = 0;
-            crystal = [];
-            makeCrystals();
-            console.log(crystal)
-            goalNumber = Math.floor((Math.random() * 120) + 19);
-            goalNumberText.text(goalNumber)
-            console.log(goalNumber)
+            restartGame()
         } 
 
 })
-
-
-
-
-
-
-    
+  
 })
 </script>
 </body>
