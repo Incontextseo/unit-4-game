@@ -6,6 +6,8 @@
   <title>Crystal Collector
   </title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Added link to the jQuery Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
@@ -36,8 +38,7 @@
                     <p>There are four crystals below. By clicking on a crystal you will add a specific amount of points to your score.</p>
                     <p>You win the game by matching your total score to the random number. You will lose the game if your total score exceeds the random number.</p>
                     <p>The value of each crystal is hidden until you click on it.</p>
-                    <p>Each time the game starts, the game will change the value of each crystal.</p>
-                    <button>Play!</button>
+                    <p>Each time the game ends, the game will change the value of each crystal.</p>
                 </div>
             </div>
             <div class="game">
@@ -54,10 +55,10 @@
                     <p id="losses">Losses: 0</p>
                 </div>
                 <div class="col-md-6">
-                    <img src="assets/images/purple-crystal.jpg" class="crystal">
-                    <img src="assets/images/kyber-crystal.jpg" class="crystal">
-                    <img src="assets/images/blue-crystal.jpg" class="crystal">
-                    <img src="assets/images/quartz-crystal.jpg" class="crystal">
+                    <img src="assets/images/purple-crystal.jpg" class="crystal" id="0">
+                    <img src="assets/images/kyber-crystal.jpg" class="crystal" id="1">
+                    <img src="assets/images/blue-crystal.jpg" class="crystal" id="2">
+                    <img src="assets/images/quartz-crystal.jpg" class="crystal" id="3">
                 </div>
             </div>
 
@@ -67,11 +68,9 @@
 
 <script>
 
-var goalNumber;
-var crystalOne;
-var crystalTwo;
-var crystalThree;
-var crystalFour;
+var goalNumber = Math.floor((Math.random() * 120) + 19);
+var crystal = [];
+var crystalNum = 0;
 var totalScore = 0;
 var wins = 0;
 var losses = 0;
@@ -80,46 +79,89 @@ var goalNumberText = $("#goal-number")
 var totalScoreText = $('#total-score')
 var announcementText = $('#win-lost')
 var winsText = $('#wins')
-var lossesText = $('#wins')
+var lossesText = $('#losses')
 
 
 
 $(document).ready(function() {
 
-    // Use a function to assign random number for the goalNumber (between 19, 120) and each crystal (between 1,12)
+    // Use a function to assign random number for each crystal (between 1,12)
+    var makeCrystals = () => {
+        for (var i=0; i<4; i++) {
+            crystal.push(makeCrystal());
+        }
+    }
+    makeCrystals()
+    // console.log ("CrystalNum Value" + crystalNum)
+    console.log(crystal)
+
+    function makeCrystal() {
+        crystalNum = Math.floor((Math.random() * 12) + 1);
+        console.log("crystal[crystalnum]: " + crystal[crystalNum])
+        if (crystal.includes(crystalNum)) {
+            return makeCrystal();
+        }
+           return crystalNum;
+    }
+
     // push the value of the goalNumber to the Dom, but not the crystal values
-    // push the value of each crystal to the HTML with innerHTML
+    goalNumberText.text(goalNumber)
+    console.log(goalNumber);
 
+ 
+    console.log(totalScore)
     $('.crystal').on('click', function() {
+        announcementText.text('');
         // Add the value of the crystal clicked on to the totalScore
-        var crystalVal = $(this).val();
+        var crystalIndex = parseInt($(this).attr("id"));
+        var crystalVal = crystal[crystalIndex]
         totalScore = totalScore + crystalVal
-
+        console.log(totalScore)
         // Send totalScore value to DOM
-        totalScoreText.text(totalScore)
-        })
+        totalScoreText.text("Your total score: " + totalScore)
+        if (totalScore === goalNumber) {
+            // Add a win to the wins variable
+            wins++;
+            // Send wins tally to DOM
+            winsText.text("Wins: " + wins);
+            // Send announcement to DOM
+            announcementText.text('You Won!');
+            console.log("Wins: " + wins)
+            // reset variables and re-run random number generator function(s)
+            totalScore = 0;
+            crystal = [];
+            makeCrystals();
+            console.log(crystal)
+            goalNumber = Math.floor((Math.random() * 120) + 19);
+            goalNumberText.text(goalNumber)
+            console.log(goalNumber)
+        } else if (totalScore > goalNumber) {
+            // Add a loss to the losses variable
+            losses++;
+            // Send losses tally to DOM
+            lossesText.text("Losses: " + losses);
+            // Send announcement to DOM
+            announcementText.text('You Lost!');
+            console.log("Losses: " + losses)
+            // reset variables and re-run random number generator function(s)
+            totalScore = 0;
+            crystal = [];
+            makeCrystals();
+            console.log(crystal)
+            goalNumber = Math.floor((Math.random() * 120) + 19);
+            goalNumberText.text(goalNumber)
+            console.log(goalNumber)
+        } 
 
-    if (goalNumber === totalScore) {
-        //re-run random number generator function(s)
+})
 
-        // Add a win to the wins variable
-        wins++;
-        // Send wins tally to DOM
-        winsText.text(wins);
-        // Send announcement to DOM
-        announcementText.text('You Won!');
-    };
-    if (totalScore > goalNumber) {
-        //re-run random number generator function(s)
 
-        // Add a loss to the losses variable
-        losses++;
-        // Send losses tally to DOM
-        lossesText.text(losses);
-        // Send announcement to DOM
-        announcementText.text('You Lost!');
-    };
-}
+
+
+
+
+    
+})
 </script>
 </body>
 </html>
