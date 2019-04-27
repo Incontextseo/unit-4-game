@@ -108,6 +108,7 @@ $(document).ready(function() {
     goalNumberText.text(goalNumber)
     console.log(goalNumber);
 
+    // Create function to restart the game and call it when the game is won or lost.
     function restartGame() {
         totalScore = 0;
         totalScoreText.text("Your total score: " + totalScore)
@@ -121,39 +122,41 @@ $(document).ready(function() {
 
  
     console.log(totalScore)
-    $('.crystal').on('click', function() {
-        announcementText.text('');
-        // Add the value of the crystal clicked on to the totalScore
-        var crystalIndex = parseInt($(this).attr("id"));
-        var crystalVal = crystal[crystalIndex]
-        totalScore = totalScore + crystalVal
-        console.log(totalScore)
-        // Send totalScore value to DOM
-        totalScoreText.text("Your total score: " + totalScore)
-        if (totalScore === goalNumber) {
-            // Add a win to the wins variable
-            wins++;
-            // Send wins tally to DOM
-            winsText.text("Wins: " + wins);
-            // Send announcement to DOM
-            announcementText.text('You Won!');
-            console.log("Wins: " + wins)
-            // reset variables and re-run random number generator function(s)
-            restartGame()
-        } else if (totalScore > goalNumber) {
-            // Add a loss to the losses variable
-            losses++;
-            // Send losses tally to DOM
-            lossesText.text("Losses: " + losses);
-            // Send announcement to DOM
-            announcementText.text('You Lost! ' + (totalScore-goalNumber) + " over.");
-            console.log("Losses: " + losses)
-            // reset variables and re-run random number generator function(s)
-            restartGame()
-        } 
+        $('.crystal').on('click', function() {
+            announcementText.text('');
+            // Add the value of the crystal clicked on to the totalScore
+            var crystalIndex = parseInt($(this).attr("id"));
+            var crystalVal = crystal[crystalIndex]
+            totalScore = totalScore + crystalVal
+            console.log(totalScore)
+            // Send totalScore value to DOM
+            totalScoreText.text("Your total score: " + totalScore)
+            // If totalScore equals goalNumber (win)
+            if (totalScore === goalNumber) {
+                // Add a win to the wins variable
+                wins++;
+                // Send wins tally to DOM
+                winsText.text("Wins: " + wins);
+                // Send announcement to DOM
+                announcementText.text('You Won!');
+                console.log("Wins: " + wins)
+                // reset variables and re-run random number generator function(s)
+                restartGame()
+            // If totalScore is greater than goalNumber (loss)
+            } else if (totalScore > goalNumber) {
+                // Add a loss to the losses variable
+                losses++;
+                // Send losses tally to DOM
+                lossesText.text("Losses: " + losses);
+                // Send announcement to DOM
+                announcementText.text('You Lost! ' + (totalScore-goalNumber) + " over.");
+                console.log("Losses: " + losses)
+                // reset variables and re-run random number generator function(s)
+                restartGame()
+            } 
 
-})
-  
+    })
+    
 })
 </script>
 </body>
