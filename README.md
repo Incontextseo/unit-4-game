@@ -15,11 +15,20 @@ CSS:
 - Different background colors/font colors for different divs.
 
 JQuery:
-- Variables for goal number, all four crystals (not shown), total score, wins, losses. - Done
-- Text Variables to send the following to the DOM - goal number, total score, wins, and losses. - Done
-- Random number generator for goal number and all four crystals (2 seperate functions or the same function?)
-- Push numbers into variables to store for calculations (crystals) and send to DOM (goal number and total score)
-- Push the value of each crystal to the DOM with innerHTML(?) so the click listener can pick it up when each img is clicked.
-- On click function to add value of each crystal to the total score when image is clicked on.
-- If-else statement to end game, send announcement, add tally, and restart game when goal number and total score match (win) or total score exceeds goal number (loss).
+    // Use a function to assign random number for each crystal (between 1,12)
+    // push the value of the goalNumber to the Dom, but not the crystal values
+    // Create function to restart the game and call it when the game is won or lost.
+    // Create on-click function to assign values to each crystal by ID.
+    // Add the value of the crystal clicked on to the totalScore
+        // Send totalScore value to DOM
+            // If totalScore equals goalNumber (win)
+                // Add a win to the wins variable
+                // Send wins tally to DOM
+                // Send announcement to DOM
+                // reset game with restartGame function
+            // If totalScore is greater than goalNumber (loss)
+                // Add a loss to the losses variable
+                // Send losses tally to DOM
+                // Send announcement to DOM
+                // reset game with restartGame function
 
